@@ -1,0 +1,4 @@
+*.o
+data/*
+drivers
+gml2wkt

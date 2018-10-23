@@ -1,0 +1,15 @@
+#+TITLE: 3D BAG
+#+AUTHOR: Wouter Beek
+
+* Installation
+
+#+BEGIN_SRC sh
+sudo dnf install gdal-devel # RedHat, Fedora
+make
+#+END_SRC
+
+* Usage
+
+#+BEGIN_SRC sh
+gml2rdf input.gml output.ttl
+#+END_SRC
