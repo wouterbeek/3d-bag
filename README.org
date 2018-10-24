@@ -292,8 +292,7 @@ pand:0193100000000016
 #+END_SRC
 
 * Issues
-** GML dimension
-
+** GML dimensions
 The attribute ~srsDimension="3"~ of tag ~gml:Envelope~ is not
 recognized by GDAL.  Adding the attribute to tag ~gml:Solid~ (i.e.,
 the highest partner tag for which GDAL detects the dimension setting)
@@ -303,7 +302,7 @@ GDAL, the source GML, or my code.
 The source files can be changed with the following script:
 
 #+BEGIN_SRC sh
-$ ./tools/fix-gml-dimension.sh input.gml output.gml
+$ ./tools/fix-gml-dimensions.sh input.gml output.gml
 #+END_SRC
 
 ** XML ampersands
@@ -314,5 +313,24 @@ ampersand when it already is part of an ~&amp;~ entity, and it also
 unnecessarily replaces the ampersand withing ~CDATA~ contexts:
 
 #+BEGIN_SRC sh
-./tools/fix-xml-ampersand.sh input.gml output.gml
+./tools/fix-xml-ampersands.sh input.gml output.gml
 #+END_SRC
+
+* Future improvements
+** TODO Simplify geometries
+The 3D geometries consist of multiple smaller 3D geometries that
+together compose the shape of a building.  Since many buildings are
+block-shaped, it is often possible to express the same 3D geometry
+using a simplified shape.  Let's see whether GDAL supports such
+simplification steps.
+
+** TODO Figure out how to stream through a GML with the GDAL library
+Reduced the memory footprint required by this script.
+
+** TODO Use GNU zip compression on in- and output files
+Reduces the disk space required by this script.
+
+** TODO Cleanup gfs file
+When parsing a GML file, GDAL creates a file with extension ~gfs~.
+See whether we can prevent GDAL from doing this, or -- if the creation
+of this file is required -- clean the file up afterward.
