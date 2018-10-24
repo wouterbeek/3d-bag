@@ -299,3 +299,20 @@ recognized by GDAL.  Adding the attribute to tag ~gml:Solid~ (i.e.,
 the highest partner tag for which GDAL detects the dimension setting)
 fixes this issue.  It is unclear to me whether this is a limitation of
 GDAL, the source GML, or my code.
+
+The source files can be changed with the following script:
+
+#+BEGIN_SRC sh
+$ ./tools/fix-gml-dimension.sh input.gml output.gml
+#+END_SRC
+
+** XML ampersands
+The GML source files sometimes contain raw ampersand characters (~&~),
+which is not allowed in XML.  We can naively replace them with ~&amp;~
+using the following script, but this will unnecessarily replace the
+ampersand when it already is part of an ~&amp;~ entity, and it also
+unnecessarily replaces the ampersand withing ~CDATA~ contexts:
+
+#+BEGIN_SRC sh
+./tools/fix-xml-ampersand.sh input.gml output.gml
+#+END_SRC
